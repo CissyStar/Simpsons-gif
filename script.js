@@ -1,22 +1,43 @@
 const giphyApiKey = "3Bqe6VoIAUhdUAAl6FcwPNGowW9nGU0m";
 const output = document.querySelector("#output");
 
-fetch("https://thesimpsonsquoteapi.glitch.me/quotes")
-  .then((res) => res.json())
-  .then((res) => {
-    const searchCharacter = res[0].character;
-    fetch(
+async function getSimpsonsQuote() {
+  try {
+    const simpsonsPromise = await fetch(
+      "https://thesimpsonsquoteapi.glitch.me/quotes"
+    );
+    const simpsonsJson = await simpsonsPromise.json();
+
+    return simpsonsJson[0].character;
+  } catch (error) {
+    console.log(`Giphy API request error: ${error}`);
+  }
+}
+
+async function getGiphyApi(character) {
+  try {
+    const giphyPromise = await fetch(
       "https://api.giphy.com/v1/gifs/search?" +
-        new URLSearchParams({ api_key: giphyApiKey, q: searchCharacter })
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        // console.log(res.data);
-        const randomNum = Math.floor(Math.random() * res.data.length);
-        // console.log(randomNum);
-        output.innerHTML = `<h1>${searchCharacter}</h1>
-                            <img src=${res.data[randomNum].images.original.url}/>`;
-      })
-      .catch((e) => console.log(`Giphy API request error: ${e}`));
-  })
-  .catch((e) => console.log(`Simpsons' quote API request error: ${e}`));
+        new URLSearchParams({ api_key: giphyApiKey, q: character })
+    );
+    const giphyJson = await giphyPromise.json();
+    const randomNum = Math.floor(Math.random() * giphyJson.data.length);
+
+    return giphyJson.data[randomNum].images.original.url;
+  } catch (error) {
+    console.log(`Giphy API request error: ${error}`);
+  }
+}
+
+async function initGif() {
+  try {
+    let searchCharacter = await getSimpsonsQuote();
+    output.innerHTML += `<h1>${searchCharacter}</h1>`;
+    let gifUrl = await getGiphyApi(searchCharacter);
+    output.innerHTML += `<img src=${gifUrl}/>`;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+initGif();
