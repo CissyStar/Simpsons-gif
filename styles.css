@@ -1,0 +1,17 @@
+
+body {
+  width: 100vw;
+  height: 100vh;
+  align-items: center;
+  display: flex;  
+}
+
+#output {
+  margin: 0 auto;
+  text-align: center;
+}
+
+img {
+  width: 420px;
+  height: auto;
+}
