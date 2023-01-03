@@ -1,4 +1,4 @@
-const giphyApiKey = "3Bqe6VoIAUhdUAAl6FcwPNGowW9nGU0m";
+const giphyApiKey = config.giphyKey;
 const output = document.querySelector("#output");
 const getButton = document.querySelector("#generate-button");
 const clearButton = document.querySelector("#clear-button");
@@ -44,7 +44,7 @@ async function initGif() {
 }
 
 function clearGif() {
-  output.innerHTML ="";
+  output.innerHTML = "";
 }
 
 getButton.addEventListener("click", initGif);
