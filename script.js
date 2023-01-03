@@ -1,5 +1,7 @@
 const giphyApiKey = "3Bqe6VoIAUhdUAAl6FcwPNGowW9nGU0m";
 const output = document.querySelector("#output");
+const getButton = document.querySelector("#generate-button");
+const clearButton = document.querySelector("#clear-button");
 
 async function getSimpsonsQuote() {
   try {
@@ -30,6 +32,7 @@ async function getGiphyApi(character) {
 }
 
 async function initGif() {
+  console.log(`initGif triggered `);
   try {
     let searchCharacter = await getSimpsonsQuote();
     output.innerHTML += `<h1>${searchCharacter}</h1>`;
@@ -40,4 +43,9 @@ async function initGif() {
   }
 }
 
-initGif();
+function clearGif() {
+  output.innerHTML ="";
+}
+
+getButton.addEventListener("click", initGif);
+clearButton.addEventListener("click", clearGif);
