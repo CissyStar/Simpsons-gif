@@ -38,11 +38,12 @@ body {
 }
 
 #image {
-  position: fixed;
+  position: relative;
+  width: 420px;
   top: 90px;
-  left: 20px;
+  left: 10px;
   border-radius: 100%;
-  z-index: 0;
+  z-index: 0；
 }
 
 #output {
