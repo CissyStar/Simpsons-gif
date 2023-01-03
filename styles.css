@@ -58,3 +58,10 @@ img {
   width: 420px;
   height: auto;
 }
+
+@media (min-width: 480px) {
+  #output {
+    position: absolute;
+    width: 100%;
+  }
+}
