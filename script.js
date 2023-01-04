@@ -1,4 +1,4 @@
-const giphyApiKey = giphy_api_key;
+const giphyApiKey = config.giphyKey;
 const output = document.querySelector("#output");
 const getButton = document.querySelector("#generate-button");
 const clearButton = document.querySelector("#clear-button");
